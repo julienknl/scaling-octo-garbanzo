@@ -44,7 +44,7 @@ if(isset($_POST['search'])) {
   $selectedState = $_POST['stateField'];
   $searchText = $_POST['searchquery'];
   
-  $specificProductQuery = "SELECT p.name, p.photo_path, p.product_price, pc.category_name, s.state_name, u.name
+  $specificProductQuery = "SELECT p.name as productName, p.photo_path, p.cod, p.product_price, pc.category_name, s.state_name, u.name
 FROM product p
 JOIN prod_category pc ON p.category = pc.cod
 JOIN state s ON p.state = s.id_state 
@@ -57,7 +57,7 @@ where s.state_name = '$selectedState' and p.name like '%{$searchText}%'";
     $result = "";
     
      while($row=$queryResult->fetch_assoc()) {
-      $path         =$row["photo_path"];
+      $path         = $row["photo_path"];
       $product_name = $row["productName"];
       $price        = $row["product_price"];
       $category     = $row["category_name"];

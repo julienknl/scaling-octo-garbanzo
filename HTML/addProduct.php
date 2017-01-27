@@ -29,11 +29,56 @@
     $selected_state      = $_POST['stateDropdown'];
     $seller_id           = $_SESSION["loggedInUser"]["uid"];
     
-    $insertProductQuery  = "INSERT INTO product(name, product_description, category, product_price, state, seller)
-                           VALUES ('$product_name', '$product_description', '$selected_category', {$product_price}, '$selected_state', '$seller_id')";
+    
+  //---------handle image upload for profile picture
+  //set directory where image will be stored
+  $item_image_dir = "../images/";
+  $itemImagePath = "";
+  if($_FILES["productImage"]["name"]){
+    
+    $imageerrors = array();
+    //get the name of the file
+    $file = $_FILES["productImage"]["name"];
+    //get name only without extension
+    $filename = pathinfo($file,PATHINFO_FILENAME);
+    //get the file extension
+    $filextension = pathinfo($file,PATHINFO_EXTENSION);
+    //check the file extension, only allow png,jpg,jpeg and gif
+    if(strtolower($filextension)!="png"
+    && strtolower($filextension)!="jpg"
+    && strtolower($filextension)!="jpeg"
+    && strtolower($filextension)!="gif")
+    {
+      $errors["image_type"] = "only jpg,jpeg,png or gif allowed";
+    }
+    //create a unique name for the image and append the extension
+    $newfilename = strtolower($filename).uniqid() . "." . $filextension;
+    //rename the file
+    $_FILES["profile_image_upload"]["name"] = $newfilename;
+    //check file size against limit of 1MB
+    if($_FILES["productImage"]["size"]>10240000){
+      $errors["image_size"] = "1MB limit exceeded";
+    }
+    //check if file is an image
+    if(!getimagesize($_FILES["productImage"]["tmp_name"])){
+      $errors["image_file"] = "file is not an image"; 
+    }
+    //check if there are no errors
+    if(!count($errors)>0){
+      //move image to profile dir
+      $itemImagePath = $item_image_dir.$newfilename;
+      move_uploaded_file($_FILES["productImage"]["tmp_name"], $itemImagePath );
+    }
+    else{
+      print_r($errors);
+    }
+  }
+    $insertProductQuery  = "INSERT INTO product(name, photo_path, product_description, category, product_price, state, seller)
+                           VALUES ('$product_name', '$itemImagePath', '$product_description', '$selected_category', '$product_price', '$selected_state', '$seller_id')";
      
     if($connection->query($insertProductQuery)) {
       echo "success";
+      echo $itemImagePath;
     }
     
     else {
@@ -43,48 +88,6 @@
   }
   
   
-  //---------handle image upload for profile picture
-  //set directory where image will be stored
-  $item_image_dir = "additem";
-  if($_FILES["profile_image_upload"]["name"]){
-    $imageerrors = array();
-    //get the name of the file
-    $file = $_FILES["profile_image_upload"]["name"];
-    //get name only without extension
-    $filename = pathinfo($file,PATHINFO_FILENAME);
-    //get the file extension
-    $filextension = pathinfo($file,PATHINFO_EXTENSION);
-    //check the file extension, only allow png,jpg,jpeg and gif
-    if(strtolower($filextension)!="png"
-    && strtolower($filextension)!="jpg"
-    && strtolower($filextension)!="jpeg"
-    && strtolower($filextension)!="png")
-    {
-      $errors["image_type"] = "only jpg,jpeg,png or gif allowed";
-    }
-    //create a unique name for the image and append the extension
-    $newfilename = strtolower($filename).uniqid().".".$filextension;
-    //rename the file
-    $_FILES["profile_image_upload"]["name"] = $newfilename;
-    //check file size against limit of 1MB
-    if($_FILES["profile_image_upload"]["size"]>10240000){
-      $errors["image_size"] = "1MB limit exceeded";
-    }
-    //check if file is an image
-    if(!getimagesize($_FILES["profile_image_upload"]["tmp_name"])){
-      $errors["image_file"] = "file is not an image"; 
-    }
-    //check if there are no errors
-    if(!count($errors)>0){
-      //move image to profile dir
-      move_uploaded_file($_FILES["profile_image_upload"]["tmp_name"], $profile_image_dir."/".$newfilename);
-      //add imagename to update query
-      $updatequery = $updatequery.",profile_image='$newfilename'";
-    }
-    else{
-      print_r($errors);
-    }
-  }
   
   
 ?>
@@ -111,7 +114,7 @@
 
 		<h2>Add your product</h2>
 
-<form method="post" action ="addProduct.php" class="form-horizontal">
+<form method="post" action ="addProduct.php" enctype="multipart/form-data" class="form-horizontal">
       
 <fieldset>
 
@@ -145,7 +148,7 @@
 <div class="form-group">
   <label class="col-md-4 control-label" for="filebutton">Upload image</label>
   <div class="col-md-4">
-    <input id="filebutton" name="filebutton" class="input-file" type="file">
+    <input id="filebutton" name="productImage" class="input-file" type="file">
   </div>
 </div>
 

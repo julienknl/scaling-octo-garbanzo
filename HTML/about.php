@@ -42,12 +42,12 @@ $disableSellOption = !$disableBuyOption;
       if(!$_SESSION["loggedInUser"]) {
   ?>
     <ul class="nav navbar-nav">
-      <li class ="active"><a href="index.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <li class="disabled"><a href="buy.php">Buy</a></li>
       <li class="disabled"><a href="cookingtip.php">Tips for cooking</a></li>
       <li class="disabled"><a href="discussion.php">Discussion</a></li>
       <li><a href="review.php">Review</a></li>
-      <li><a href="about.php">About us</a></li>
+      <li class ="active"><a href="about.php">About us</a></li>
     </ul>
     
     <ul class="nav navbar-nav navbar-right" style="color:white;">
@@ -61,7 +61,7 @@ $disableSellOption = !$disableBuyOption;
         $welcomeMessage = "Welcome ".$_SESSION["loggedInUser"]["username"];
     ?>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="index.php">Home</a></li>
+      <li><a href="index.php">Home</a></li>
       <?php 
         if($disableBuyOption) {
           echo '<li class="disabled"><a>Buy</a></li>';
@@ -74,7 +74,7 @@ $disableSellOption = !$disableBuyOption;
       <li><a href="cookingtip.php">Tips for cooking</a></li>
       <li><a href="discussion.php">Discussion</a></li>
       <li><a href="review.php">Review</a></li>
-      <li><a href="about.php">About us</a></li>
+      <li class ="active"><a href="about.php">About us</a></li>
     </ul>
     
     
