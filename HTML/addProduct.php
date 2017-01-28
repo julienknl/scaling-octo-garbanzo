@@ -23,7 +23,7 @@
   
   if(isset($_POST['addProduct'])) {
     $product_name        = $_POST['productName'];
-    $product_description = $_POST['productDescription'];
+    $product_description = $connection->real_escape_string($_POST['productDescription']);
     $product_price       = floatval($_POST['productPrice']);
     $selected_category   = $_POST['categoryDropdown'];
     $selected_state      = $_POST['stateDropdown'];
@@ -82,7 +82,7 @@
     }
     
     else {
-      echo "failure";
+      echo  mysqli_error($connection);
     }
     
   }
@@ -154,7 +154,7 @@
 
     <!-- Select place container -->
   <div class="form-group">
-    <label class="col-md-4 control-label" for="categoryDropdown">State</label> 
+    <label class="col-md-4 control-label" for="categoryDropdown">Category</label> 
       <div class="col-md-4">
         <select class="form-control" id ="categoryDropdown" name ="categoryDropdown" style="margin-bottom:20px;">
           <?php echo $categoryOptions ?>
