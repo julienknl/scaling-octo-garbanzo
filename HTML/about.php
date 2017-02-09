@@ -26,7 +26,7 @@ $disableSellOption = !$disableBuyOption;
   <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
-<body>
+<body style="background-color:white;">
   
   <!-- Navigation bar section -->
   <nav class="navbar navbar-inverse">
@@ -98,7 +98,19 @@ $disableSellOption = !$disableBuyOption;
   </div>
   </nav>
   
-  <h1>About section</h1>
+  <!-- About page image cover -->
+  <div class="homePageImageCoverContainer">
+      <img src="/images/aboutthemcover.png" class="img-fluid" width=100%>
+  </div>
+  
+  <div class="container">
+    <div class="col-md-11" style="text-align:left;">
+      <h1 style="color:#5A8E3E; padding-top:20px; text-align:left;">Who we are?</h1>
+      <p style="font-size:12pt; color:#000000">As NSW just legalized Marijuana/Weed, that is weed farming and selling, we decided to develop a website that will help customers (only the authorized customers by providing a proof) to find a nearby seller or any other region of their choice.</br>
+        Marijuafinder focuses on reducing illegal selling of drugs by providing only verified/approved sellers. Usually, when Marijuana are sold illegally, it can be dangerous for the customers as the drug dealers tend to make fake Marijuana that can be fatal for the clients. So Marijuanafinder registered sellers will provide real and good quality of Marijuana.</br>
+        Sometime it is quite hard to talk to other people about Marijuana, about the good or any advise of how using the drug. Marijuafinder will provide a discussion page where all the users will be free to communicate about any subject regarding Marijuana.</p>
+    </div>
+  </div>
   
     <!--Footer section-->
   <div class="container" style="background-color:#232323;">
@@ -110,8 +122,8 @@ $disableSellOption = !$disableBuyOption;
       </div>
       <div class="col-sm-4">
         <p style="font-size:20px;">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-sm-4">
         <p style="font-size:20px;">Community</p>

@@ -1,12 +1,32 @@
 <?php
 
 include_once "requiredlogin.php";
+include_once "../Database/database.php";
 
 $role = $_SESSION["loggedInUser"]["role"];
 
 $disableBuyOption  = strcmp($role, "BUYER") == 0 ? false : true;
 $disableSellOption = !$disableBuyOption;
 
+$getDiscussionsQuery = "SELECT * FROM discussion";
+
+$discussions = $connection->query($getDiscussionsQuery);
+
+if($discussions->num_rows > 0) {
+  $result = "";
+  while($row=$discussions->fetch_assoc()) {
+    $discussion_id          = $row['id'];
+    $discussion_title       = $row['title'];
+    $discussion_description = $row['description'];
+    $result                .=  "<div class=\"col-md-12\" style=\"background-color:#E0EDC8; margin-top:10px; padding:20px; text-align:left;\">
+                                    <a href = \"viewDiscussion.php?discussion=$discussion_id \">
+                                    <b><p>$discussion_title</p></b>
+                                    <p>$discussion_description</p>
+                                    </a>
+                                </div>";
+    
+  }
+}
 ?>
 
 <!DOCTYPE html>
@@ -26,7 +46,7 @@ $disableSellOption = !$disableBuyOption;
   <link rel="stylesheet" href="../CSS/style.css">
 </head>
 
-<body>
+<body style="background-color: #FFF8F0;">
   
   <!-- Navigation bar section -->
   <nav class="navbar navbar-inverse">
@@ -100,7 +120,17 @@ $disableSellOption = !$disableBuyOption;
   </div>
   </nav>
   
-  <h1>Discussion section</h1>
+  <h1 style="padding:50px; background-color:#5A8E3E; color:white;">Discussion topics</h1>
+  
+  <div style="text-align: right; padding-right:30px;">
+    <a href="addDiscussion.php" class="btn btn-default">Add discussion</a>
+  </div>
+  
+  <div class="container">
+    <div class ="row">
+      <?php echo $result; ?>
+    </div>
+  </div>
   
     <!--Footer section-->
   <div class="container" style="background-color:#232323;">
@@ -112,8 +142,8 @@ $disableSellOption = !$disableBuyOption;
       </div>
       <div class="col-sm-4">
         <p style="font-size:20px;">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Community</p>

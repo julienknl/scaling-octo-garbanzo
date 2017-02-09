@@ -126,29 +126,8 @@ $disableSellOption = !$disableBuyOption;
   
   <!-- Popular reviews container -->
   <div class="container" style="background-color:#5A8E3E;">
-    <h1 style="color:white;">Popular Reviews!</h1>
-    <div class="row">
-      <div class="col-md-8 col-md-offset-2">
-        <div class="row">
-          <div class="col-md-3">
-            <img src="http://lorempixel.com/400/400/" class="img-responsive">
-            <p style="color:white;">Product Name</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://lorempixel.com/400/400/" class="img-responsive">
-             <p style="color:white;">Product Name</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://lorempixel.com/400/400/" class="img-responsive">
-             <p style="color:white;">Product Name</p>
-          </div>
-          <div class="col-md-3">
-            <img src="http://lorempixel.com/400/400/" class="img-responsive">
-             <p style="color:white;">Product Name</p>
-          </div>
-        </div>
-      </div>
-    </div>
+    <h1 style="color:white;">Why this website?</h1>
+     <p style="color:white; font-size:16px; margin:30px;">Marijuafinder has been created to sell pure marijuana for those who are in need to heal some medical conditions. At the same time, it has been created to reduce selling of fake weed which can be fatal for humans.</p>
   </div>
   
   <!--Footer section-->
@@ -161,8 +140,8 @@ $disableSellOption = !$disableBuyOption;
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Community</p>

@@ -21,7 +21,7 @@ if(isset($_POST['state'])) {
     $result = "";
     
      while($row=$queryResult->fetch_assoc()) {
-      $path         =$row["photo_path"];
+      $path         = $row["photo_path"];
       $product_name = $row["productName"];
       $price        = $row["product_price"];
       $category     = $row["category_name"];
@@ -242,8 +242,8 @@ where s.state_name = '$selectedState' and p.name like '%{$searchText}%'";
       </div>
       <div class="col-md-4">
         <p style="font-size:20px; color:#5A8E3E">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Community</p>

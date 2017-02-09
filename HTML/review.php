@@ -1,4 +1,5 @@
 <?php
+include_once("../Database/database.php");
 
 session_start();
 
@@ -6,6 +7,31 @@ $role = $_SESSION["loggedInUser"]["role"];
 
 $disableBuyOption  = strcmp($role, "BUYER") == 0 ? false : true;
 $disableSellOption = !$disableBuyOption;
+
+$getProductByRating = "SELECT p.name, p.photo_path, p.product_description, p.rating  from product p order by p.rating DESC";
+
+$retrievedProducts = $connection->query($getProductByRating);
+
+$result = "";
+
+if($retrievedProducts->num_rows > 0) {
+  while($row=$retrievedProducts->fetch_assoc()) {
+    $name        = $row["name"];
+    $photo_path  = $row["photo_path"];
+    $description = $row["product_description"];
+    $rating      = $row["rating"];
+    $result     .= "<div class=\"col-md-2\">
+                              <img src=$photo_path class=\"img-responsive\">
+                              <b><p>$name</p></b>
+                              <p>Rating $rating/5.0</p>
+                              <hr>
+                  </div>";
+    
+  }
+}
+else {
+  echo $connection->error;
+}
 
 ?>
 
@@ -100,7 +126,13 @@ $disableSellOption = !$disableBuyOption;
   </div>
   </nav>
   
-  <h1>Review section</h1>
+  <h1 style="padding:50px; background-color:white;">Product Review</h1>
+  
+  <div class="container">
+    <div class="row" style="padding:30px;">
+      <?php echo $result ?>
+    </div>
+  </div>
   
     <!--Footer section-->
   <div class="container" style="background-color:#232323;">
@@ -112,8 +144,8 @@ $disableSellOption = !$disableBuyOption;
       </div>
       <div class="col-sm-4">
         <p style="font-size:20px;">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Community</p>

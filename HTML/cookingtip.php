@@ -100,7 +100,66 @@ $disableSellOption = !$disableBuyOption;
   </div>
   </nav>
   
-  <h1>Cooking section</h1>
+  <!-- Main container -->
+  <div class="container" style="background-color:white; padding:30px;">
+    
+     <!-- Author description -->
+  <div class="col-md-3" style="background-color:#E0EDC8; padding-bottom:30px; margin:20px;">
+    <h1 style="font-size:20px; color:#000000;">Author</h1>
+    <img src="/images/sellerOne.png" alt="">
+    <h2 style="font-size:16px; font-style:bold; color:#000000;">About the author</h2>
+    <p style="color:#000000;">This author, originated from the United States love to write good articles about Marijuana and it's usage. He likes particularly to visit places where Marijuana is legal and write stories about it. He is also an admin of our website.</p>
+  </div>
+  
+  <!-- Blog post -->
+    <div class="col-md-8" style="margin-left:30px">
+      <div style="background-color:#E0EDC8; padding:30px; margin:20px;">
+        <img src="/images/blogpictureone.png" alt="">
+        <h2 style="font-size:16px; font-style:bold; color:#000000;">Making Cannaoil/Cannabutter</h2>
+        <p style="color:#000000;">Edibles are a discreet and convenient way to consume cannabis, particularly for those who cannot tolerate smoke.</br>
+
+            Made by infusing cannabis with food, many find that edibles offer a high that is more calm and relaxing than smoking pot. On the other hand, the effects of edibles can be hard to predict and tend to differ between individuals.</br>
+
+            Before sinking your teeth into edibles, do yourself a favor and get to know the facts.</p>
+      </div>
+      
+      <div style="background-color:#E0EDC8; padding:30px; margin:20px;">
+        <img src="/images/blogpicturetwo.png" alt="">
+        <h2 style="font-size:16px; font-style:bold; color:#000000;">Raw Chocolate Hemp Butter</h2>
+        <p style="color:#000000;">This dish made with green hemp butter is stone ground and silky smooth. Chocolate hemp macaroons are chewy and chocolaty with a definite hemp flavor.</p>
+        <p style="color:#000000; text-align:left;">3 tablespoons melted raw organic cacao butter</br>
+
+            3 tablespoons coconut cream (thick stuff)</br>
+            
+            3 tablespoons hemp butter</br>
+            
+            3 tablespoons warm spring water</br>
+            
+            1 ½ cups shredded coconut</br>
+            
+            5 tablespoons raw organic cacao powder</br>
+            
+            3 tablespoons xylitol, powdered in a coffee grinder</br>
+            
+            7-8 drops vanilla stevia extract</br>
+            
+            2 pinches of sea salt</p>
+      </div>
+      
+      <div style="background-color:#E0EDC8; padding:30px; margin:20px;">
+        <img src="/images/blogpicturethree.png" alt="">
+        <h2 style="font-size:16px; font-style:bold; color:#000000;">Gourmet Hash Oil Chocolate</h2>
+        <p style="color:#000000;">Gourmet Hash Oil Chocolate is a basic but delicious chocolate recipe using hash oil to create your own marijuana edible candy bars, cookies and desserts. This is a rich, dark chocolate that stands up on the counter if using Cocao Butter and in the fridge if using coconut oil and pack a wallop if you use strong, activated hash oil.</p>
+        <p style="color:#000000; text-align:left;">1 Cup (240 ml) Raw Organic Cacao Butter (Or Coconut oil)</br>
+              1 Cup (240 ml) Raw Organic Cacao Powder</br>
+              1/2 Cup (120 ml) Maple Syrup</br>
+              1 tsp (5 ml) Vanilla Extract</br>
+              1/4 Cup (60 ml) Chopped Nuts (Optional)</br>
+              10 grams Hash Oil Concentrate *</br>
+              pinch of sea salt</p>
+      </div>
+    </div>
+  </div>
   
     <!--Footer section-->
   <div class="container" style="background-color:#232323;">
@@ -112,8 +171,8 @@ $disableSellOption = !$disableBuyOption;
       </div>
       <div class="col-sm-4">
         <p style="font-size:20px;">Contact</p>
-        <a href="url" style="color:white;">Contact us</a></br>
-        <a href="url" style="color:white;">Send us your feedback</a>
+        <a href="contactform.php" style="color:white;">Contact us</a></br>
+        <a href="feedbackform.php" style="color:white;">Send us your feedback</a>
       </div>
       <div class="col-md-4">
         <p style="font-size:20px;">Community</p>

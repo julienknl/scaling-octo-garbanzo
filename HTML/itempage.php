@@ -8,17 +8,44 @@ $disableBuyOption  = strcmp($role, "BUYER") == 0 ? false : true;
 $disableSellOption = !$disableBuyOption;
 
 $product_id = $_GET["product"];
-$getProductQuery = "Select p.product_description, p.photo_path  from product p where cod = '$product_id'";
+$getProductQuery = "Select p.product_description, p.photo_path, p.number_of_reviewers, p.rating  from product p where cod = '$product_id'";
 
 $product = $connection->query($getProductQuery);
 
 $product_description = "";
 $product_image       = "";
+$product_reviewers   = 0;
+$product_rating      = 0;
 
 if($product->num_rows > 0) {
   $row = $product->fetch_assoc();
   $product_description = $row["product_description"];
   $product_image       = $row["photo_path"];
+  $product_reviewers   = $row["number_of_reviewers"];
+  $product_rating      = $row["rating"];
+}
+
+  /*
+  * Get the new rating and the stored rating.
+  * Add 1 to the number of reviewers then get the average rating for the product and saves the result
+  */
+if(isset($_POST['rate'])) {
+  $submitted_rating = $_POST['rating'];
+  $product_reviewers++;
+  $rating = bcdiv(($product_rating + $submitted_rating), $product_reviewers, 2);
+
+  $updateQuery = "UPDATE product
+                  SET number_of_reviewers =  '$product_reviewers',
+                  rating = '$rating'
+                  WHERE cod = '$product_id'";
+                  
+  if($connection->query($updateQuery)) {
+    echo "success";
+  }
+  
+  else {
+    echo $connection->error;
+  }
 }
 
 
@@ -40,6 +67,26 @@ if($product->num_rows > 0) {
   
   <!-- CSS file-->
   <link rel="stylesheet" href="../CSS/style.css">
+  <link rel="stylesheet" href ="../CSS/rating-style.css">
+  
+  <!-- Jrate -->
+  <script src="../bower_components/jRate/src/jRate.js"></script>
+  
+  <script type="text/javascript" >
+    $(document).ready(function() {
+      $("#jRate").jRate({
+        precision: 0.5,   
+        startColor: "yellow",
+        endColor: "yellow",
+        onChange: function(rating) {
+          $("#given_rating").val(rating);
+			    $('#current_rating').text("Your Rating: "+rating);
+		    }
+      });
+      
+      
+    });
+  </script>
 </head>
 
 <body>
@@ -124,8 +171,16 @@ if($product->num_rows > 0) {
       <div class="col-md-8" style="background-color:#E0EDC8; padding-bottom:20px;">
           <h1 style="text-align:left;">Description</h1>
           <p style="text-align:left;"><?php echo $product_description ?></p>
+          <form method="post" style="text-align:right; padding:20px;">
+             <div id="jRate"></div>
+          <span id="current_rating"></span>
+          <input type="hidden" id="given_rating" name="rating"/>
+            <input type="submit" name="rate" value="Rate"/>
+          </form>
+         
           <button type="button" class="btn btn-default btn pull-right">Buy</button>
       </div>
+      
   </div>
 </body>
 </html>
